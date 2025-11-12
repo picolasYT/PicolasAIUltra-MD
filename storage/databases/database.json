@@ -1,0 +1,85 @@
+{
+  "users": {
+    "5492994587598@s.whatsapp.net": {
+      "exp": 184,
+      "limit": 10,
+      "registered": true,
+      "name": "picolas",
+      "age": 18,
+      "regTime": 1762968162303,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "useDocument": true,
+      "bank": 0,
+      "level": 0,
+      "premium": false,
+      "premiumTime": 0
+    },
+    "3655587631336@lid": {
+      "exp": 106,
+      "limit": 10,
+      "registered": true,
+      "name": "picolas",
+      "age": 18,
+      "regTime": 1762968245115,
+      "afk": -1,
+      "afkReason": "",
+      "banned": false,
+      "useDocument": true,
+      "bank": 0,
+      "level": 0,
+      "premium": false,
+      "premiumTime": 0
+    }
+  },
+  "chats": {
+    "5492994587598@s.whatsapp.net": {
+      "isBanned": false,
+      "bienvenida": true,
+      "antiLink": false,
+      "onlyLatinos": false,
+      "nsfw": false,
+      "expired": 0
+    },
+    "51951013256@s.whatsapp.net": {
+      "isBanned": false,
+      "bienvenida": true,
+      "antiLink": false,
+      "onlyLatinos": false,
+      "nsfw": false,
+      "expired": 0
+    },
+    "120363404323791802@g.us": {
+      "isBanned": false,
+      "bienvenida": true,
+      "antiLink": false,
+      "onlyLatinos": false,
+      "nsfw": false,
+      "expired": 0
+    }
+  },
+  "stats": {
+    "main-menu.js": {
+      "total": 7,
+      "success": 5,
+      "last": 1762968371032,
+      "lastSuccess": 1762968257440
+    },
+    "rg-reg.js": {
+      "total": 3,
+      "success": 2,
+      "last": 1762968246353,
+      "lastSuccess": 1762968168175
+    }
+  },
+  "msgs": {},
+  "sticker": {},
+  "settings": {
+    "5492994587598@s.whatsapp.net": {
+      "self": false,
+      "autoread": false,
+      "status": 0
+    }
+  }
+}
