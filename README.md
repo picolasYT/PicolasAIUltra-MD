@@ -1,74 +1,89 @@
-<h1 align="center">【 ✯ Ai Hoshino - MD ✰ 】</p>
-<p>
-        <img src= "https://raw.githubusercontent.com/StarlightsTeam/Ai-Hoshino/main/storage/img/menu.jpg">
-    </p>
-    <p align="center">
-        <a href="#"><img title="simple-whatsapp-bot" src="https://img.shields.io/badge/-SIMPLE--WHATSAPP--BOT-green?colorA=%23ff0000&colorB=%23017e40&style=for-the-badge"></a>
-    </p>
-    <p>
-        <a href="https://github.com/StarlightsTeam"><img title="Author"    src="https://img.shields.io/badge/Author-おDaniel-purple.svg?style=for-the-badge&logo=github"></a>
-    </p>
-    <p>
-        <a href="https://github.com/StarlightsTeamollowers"><img title="Followers" src="https://img.shields.io/github/followers/StarlightsTeam?color=blue&style=flat-square"></a>
-        <a href="https://github.com/StarlightsTeam/Ai-Hoshino/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/StarlightsTeam/Ai-Hoshino?color=red&style=flat-square"></a>
-        <a href="https://github.com/StarlightsTeam/Ai-Hoshino/network/members"><img title="Forks" src="http://img.shields.io/github/forks/StarlightsTeam/Ai-Hoshino?color=red&style=flat-square"></a>
-        <a href="#"><img src="https://img.shields.io/badge/MANTENIMIENTO-SI-blue.svg"</a>
-        <img src="https://img.shields.io/github/repo-size/StarlightsTeam/Ai-Hoshino" /> <br>
-   </p>
-   <p>
-</h1>
+# ☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆  
 
----------
+✨ **WhatsApp Bot Multi-Device** basado en Baileys  
+🔮 Desarrollado y personalizado por **Picolas Team**
 
-## <img src="https://i.pinimg.com/originals/73/69/6e/73696e022df7cd5cb3d999c6875361dd.gif" alt="Características" width="42" height="42"> Características
+---
 
-> Bot en creación pronto se agregaran más cosas 
+## 🚀 Características
 
-- [x] Interacción con voz y texto
-- [x] Configuración de grupo
-- [x] antidelete, antilink, antiarabes, etc
-- [x] Bienvenida personalizada
-- [x] Chatbot (simsimi)
-- [x] Crear sticker de image/video/gif/url
-- [x] SubBot (Jadibot)
-- [x] Juego RPG
-- [x] Descarga de música y video de YT
-- [ ] Otros
+- 🤖 IA integrada para respuestas automáticas  
+- 🧠 Modo conversacional estilo ChatGPT  
+- 🎥 Soporte para video en `.menu` (video de presentación)  
+- 🖼️ Envío de imágenes, stickers y audio  
+- 🎧 Respuestas con voz (TTS opcional)  
+- 💬 Detección de comandos personalizada  
+- ⚙️ Sistema modular (más de 100 plugins en carpeta `/plugins`)  
+- 🧩 Fácil de modificar y expandir  
 
----------
+---
 
-## <img src="https://i.pinimg.com/originals/19/80/6e/19806e91932e6054965fc83b85241270.gif" alt="Contacto" width="42" height="42"> Contacto
+## 📂 Estructura del Proyecto
 
-- Si la Bot tiene algún contactame ฅ^•ﻌ•^ฅ
+/PicolasAIUltra-MD/
+├── index.js
+├── settings.js
+├── /media/
+│ └── menu.mp4 # Video mostrado en el comando .menu
+├── /plugins/ # Comandos del bot
+│ ├── menu.js
+│ ├── tools.js
+│ └── ...
+├── package.json
+└── README.md
 
-* <a href="https://wa.me/5218261000681"><img alt="WhatsApp" src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
+yaml
+Copiar código
 
----------
+---
 
-## <img src="https://static.wikia.nocookie.net/nyancat/images/d/d3/Nyan-cat.gif/revision/latest/scale-to-width-down/400?cb=20131231222500&path-prefix=es" alt="Grupo" width="45" height="43"> Grupo de WhatsApp
+## 💻 Instalación
 
+1. **Cloná el repositorio**
+   ```bash
+   git clone https://github.com/picolasYT/PicolasAIUltra-MD.git
+   cd PicolasAIUltra-MD
+Instalá las dependencias
 
-- Si quieres probar la Bot antes de instalar
+bash
+Copiar código
+npm install
+Iniciá el bot
 
-* <a href="https://chat.whatsapp.com/CH3hrd4ovGHIsFjj8dWGrf"><img alt="Group" src="https://img.shields.io/badge/Group-25D366?style=for-the-badge&logo=whatsapp&logoColor=white"/></a>
+bash
+Copiar código
+npm start
+Escaneá el QR que aparece para vincular tu cuenta de WhatsApp.
 
----------
+🧠 Comandos Principales
+Comando	Descripción
+.menu	Muestra el menú principal con video
+.ai	Chat de inteligencia artificial
+.sticker	Convierte una imagen en sticker
+.voz	Convierte texto en audio
+.help	Lista completa de comandos
 
-## Repo Stats 🔭
+📸 Vista previa
+🧩 Video de menú y presentación personalizada.
+🌌 Logo: {PicolasAIultra-MD} con neón azul/rojo.
+📞 Avatar de contacto y catálogo disponibles.
 
-![github card](https://github-readme-stats.vercel.app/api/pin/?username=StarlightsTeam&repo=Ai-Hoshino&theme=chartreuse-dark)
+🧑‍💻 Créditos
+💡 Desarrollado por Picolas Team
 
----------
+🧩 Basado en el framework Baileys Multi-Device
 
-## <img src="https://raw.githubusercontent.com/vilcajoal/vilcajoal/master/assets/octocat-anime.gif" alt="Github" width="44" height="44"> Github Stats
+🖤 Inspirado en Ai Hoshino - MD (Starlights Team)
 
-![github stats](https://github-readme-stats.vercel.app/api?username=StarlightsTeam&show_icons=true&theme=chartreuse-dark)
-![github toplang](https://github-readme-stats.vercel.app/api/top-langs/?username=StarlightsTeam&layout=compact&theme=chartreuse-dark)
+⚠️ Aviso Legal
+Este bot fue desarrollado con fines educativos y de entretenimiento.
+No se permite el uso para spam, abuso o actividades ilegales.
 
----------
-<div align="center">
-  <h1 align="center">Editor y Propietario de la Bot</h1>
+🌐 Enlaces Oficiales
+🌟 Canal Oficial: Picolas Team - WhatsApp Channel
 
-<a href="https://github.com/IrokzDal"><img src="https://github.com/IrokzDal.png" width="300" height="300" alt="Irokz Dal ダーク"/></a>
+💾 Repositorio GitHub: picolasYT/PicolasAIUltra-MD
 
-`© Ai Hoshino - MD / Starlights Team _ By Irokz Dal ダーク`
+💬 Contacto: ☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆
+
+© 2025 Picolas Team — Todos los derechos reservados.
