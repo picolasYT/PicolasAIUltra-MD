@@ -1,30 +1,45 @@
-let handler  = async (m, { conn }) => {
+let handler = async (m, { conn }) => {
 
-let img = `https://i.pinimg.com/736x/6e/5b/9a/6e5b9a6cf03311b94229cb3736d70bdc.jpg`
+let img = 'https://files.catbox.moe/hro1e1.gif' // GIF oficial PicolasAIUltra-MD
 
-let txt = `*Hola!, te invito a unirte a los grupos oficiales de del Bot para convivir con la comunidad :D*
+let txt = `*¡Hola! Te invito a unirte a los grupos oficiales del bot y ser parte de la comunidad ⭐*
 
-1- 【 ✯ Starlights Team ✰ 】
+1- ☆ {PicolasAIUltra-MD} ☆  — Grupo I
 *✰* ${global.group}
 
-2- 【 ✯ Starlights Team ✰ 】- ll
+2- ☆ {PicolasAIUltra-MD} ☆  — Grupo II
 *✰* ${global.group2}
 
-3- 【 ✯ Starlights Team ✰ 】- lll
+3- ☆ {PicolasAIUltra-MD} ☆  — Grupo III
 *✰* ${global.group3}
 
 *─ׄ─ׅ─ׄ⭒─ׄ─ׅ─ׄ⭒─ׄ─ׅ─ׄ⭒─ׄ─ׅ─ׄ⭒─ׄ─ׅ─ׄ⭒─ׄ─ׅ─ׄ*
 
-➠ Enlaces anulados? entre aquí! 
+📣 *¿Los enlaces no funcionan? Entra aquí:*
 
-Canal :
+Canal oficial:
 *✰* ${global.canal}
 
-> [ ✰ ] ${global.textbot}`
-await conn.sendFile(m.chat, img, "Thumbnail.jpg", txt, m, null, rcanal)
+> ☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆  
+> ${global.textbot}
+`
+
+// 🔥 Enviar GIF como video para que funcione en celular
+await conn.sendMessage(
+  m.chat,
+  {
+    video: { url: img },
+    caption: txt,
+    gifPlayback: true,
+    mentions: [m.sender]
+  },
+  { quoted: m }
+)
+
 }
+
 handler.help = ['grupos']
 handler.tags = ['main']
 handler.command = /^(grupos)$/i
 
-export default handler 
+export default handler

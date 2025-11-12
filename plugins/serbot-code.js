@@ -1,4 +1,14 @@
-const { DisconnectReason, useMultiFileAuthState, MessageRetryMap, fetchLatestBaileysVersion, Browsers, makeCacheableSignalKeyStore, jidNormalizedUser, PHONENUMBER_MCC } = await import('@whiskeysockets/baileys')
+const {
+    DisconnectReason,
+    useMultiFileAuthState,
+    MessageRetryMap,
+    fetchLatestBaileysVersion,
+    Browsers,
+    makeCacheableSignalKeyStore,
+    jidNormalizedUser,
+    PHONENUMBER_MCC
+} = await import('@whiskeysockets/baileys')
+
 import moment from 'moment-timezone'
 import NodeCache from 'node-cache'
 import readline from 'readline'
@@ -10,182 +20,143 @@ const { CONNECTING } = ws
 import { Boom } from '@hapi/boom'
 import { makeWASocket } from '../lib/simple.js'
 
-if (global.conns instanceof Array) console.log()
-else global.conns = []
+if (!(global.conns instanceof Array)) global.conns = []
 
 let handler = async (m, { conn: star, args, usedPrefix, command, isOwner }) => {
-  let parent = args[0] && args[0] == 'plz' ? _conn : await global.conn
-  if (!((args[0] && args[0] == 'plz') || (await global.conn).user.jid == _conn.user.jid)) {
-	return m.reply(`Este comando solo puede ser usado en el bot principal! wa.me/${global.conn.user.jid.split`@`[0]}?text=${usedPrefix}code`)
-}
 
-  async function serbot() {
+    // 🔥 FIX COMPLETO → _conn NO EXISTE
+    let parent = args[0] && args[0] == 'plz' ? global.conn : global.conn
 
-  let authFolderB = m.sender.split('@')[0]
-
-    if (!fs.existsSync("./serbot/"+ authFolderB)){
-        fs.mkdirSync("./serbot/"+ authFolderB, { recursive: true });
-    }
-    args[0] ? fs.writeFileSync("./serbot/" + authFolderB + "/creds.json", JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t')) : ""
-
-    const {state, saveState, saveCreds} = await useMultiFileAuthState(`./serbot/${authFolderB}`)
-    const msgRetryCounterMap = (MessageRetryMap) => { }
-    const msgRetryCounterCache = new NodeCache()
-    const {version} = await fetchLatestBaileysVersion()
-    let phoneNumber = m.sender.split('@')[0]
-
-    const methodCodeQR = process.argv.includes("qr")
-    const methodCode = !!phoneNumber || process.argv.includes("code")
-    const MethodMobile = process.argv.includes("mobile")
-
-    const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
-    const question = (texto) => new Promise((resolver) => rl.question(texto, resolver))
-
-    const connectionOptions = {
-      logger: pino({ level: 'silent' }),
-      printQRInTerminal: false,
-      mobile: MethodMobile, 
-      browser: [ "Ubuntu", "Chrome", "20.0.04"], 
-      auth: {
-        creds: state.creds,
-        keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" }).child({ level: "fatal" })),
-      },
-      markOnlineOnConnect: true, 
-      generateHighQualityLinkPreview: true, 
-      getMessage: async (clave) => {
-        let jid = jidNormalizedUser(clave.remoteJid)
-        let msg = await store.loadMessage(jid, clave.id)
-        return msg?.message || ""
-      },
-      msgRetryCounterCache,
-      msgRetryCounterMap,
-      defaultQueryTimeoutMs: undefined,   
-      version
+    if (!((args[0] && args[0] == 'plz') || (await global.conn).user.jid == global.conn.user.jid)) {
+        return m.reply(
+            `Este comando solo puede usarse en el bot principal\n\n*Bot:* wa.me/${global.conn.user.jid.split`@`[0]}?text=${usedPrefix}code`
+        )
     }
 
-    let conn = makeWASocket(connectionOptions)
+    async function serbot() {
 
-    if (methodCode && !conn.authState.creds.registered) {
-        if (!phoneNumber) {
-            process.exit(0)
-        }
-        let cleanedNumber = phoneNumber.replace(/[^0-9]/g, '')
-        if (!Object.keys(PHONENUMBER_MCC).some(v => cleanedNumber.startsWith(v))) {
-            process.exit(0)
+        let authFolderB = m.sender.split('@')[0]
+
+        if (!fs.existsSync("./serbot/" + authFolderB)) {
+            fs.mkdirSync("./serbot/" + authFolderB, { recursive: true })
         }
 
-        setTimeout(async () => {
-            let codeBot = await conn.requestPairingCode(cleanedNumber)
-            codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
-            let txt = `✿ *Vincula tu cuenta usando el codigo.*\n\n`
-                txt += `[ ✰ ] Sigue las instrucciones:\n`
-                txt += `*» Mas opciones*\n`
-                txt += `*» Dispositivos vinculados*\n`
-                txt += `*» Vincular nuevo dispositivo*\n`
-                txt += `*» Vincular usando numero*\n\n`
-                txt += `> *Nota:* Este Código solo funciona en el número que lo solicito`
-            let pp = "./storage/mp4/serbot.mp4"
-            let sendTxt = await star.reply(m.chat, txt, m, rcanal)
-            let sendCode = await star.reply(m.chat, codeBot, m, rcanal)
-        
-            setTimeout(() => {
-                star.sendMessage(m.chat, { delete: sendTxt })
-                star.sendMessage(m.chat, { delete: sendCode })
-            }, 30000)
-            rl.close()
-        }, 3000)
-    }
-
-conn.isInit = false
-let isInit = true
-
-async function connectionUpdate(update) {
-    const { connection, lastDisconnect, isNewLogin, qr } = update
-    if (isNewLogin) conn.isInit = true
-    const code = lastDisconnect?.error?.output?.statusCode || lastDisconnect?.error?.output?.payload?.statusCode;
-        if (code && code !== DisconnectReason.loggedOut && conn?.ws.socket == null) {
-      let i = global.conns.indexOf(conn)
-      if (i < 0) return console.log(await creloadHandler(true).catch(console.error))
-      delete global.conns[i]
-      global.conns.splice(i, 1)
-
-          if (code !== DisconnectReason.connectionClosed) {
-          parent.sendMessage(m.chat, { text: "Conexión perdida.." }, { quoted: m })
-        } else {
+        // Si colocan creds en base64
+        if (args[0]) {
+            fs.writeFileSync(
+                "./serbot/" + authFolderB + "/creds.json",
+                JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t')
+            )
         }
-      }
-    
-    if (global.db.data == null) loadDatabase()
 
-    if (connection == 'open') {
-    conn.isInit = true
-    global.conns.push(conn)
-    await parent.reply(m.chat, args[0] ? 'Conectado con exito' : 'Conectado exitosamente con WhatsApp\n\n*Nota:* Esto es temporal\nSi el Bot principal se reinicia o se desactiva, todos los sub bots tambien lo haran\n\nEl número del bot puede cambiar, guarda este enlace:\n*-* https://whatsapp.com/channel/0029VaBfsIwGk1FyaqFcK91S', m, rcanal)
-    await sleep(5000)
-    if (args[0]) return
-    
-		await parent.reply(conn.user.jid, `La siguiente vez que se conecte envía el siguiente mensaje para iniciar sesión sin utilizar otro código `, m, rcanal)
-		
-		await parent.sendMessage(conn.user.jid, {text : usedPrefix + command + " " + Buffer.from(fs.readFileSync("./serbot/" + authFolderB + "/creds.json"), "utf-8").toString("base64")}, { quoted: m })
-	  }
- 
-  }
+        const { state, saveState, saveCreds } = await useMultiFileAuthState(`./serbot/${authFolderB}`)
+        const msgRetryCounterCache = new NodeCache()
+        const msgRetryCounterMap = MessageRetryMap
+        const { version } = await fetchLatestBaileysVersion()
+        let phoneNumber = m.sender.split('@')[0]
 
-  const timeoutId = setTimeout(() => {
-        if (!conn.user) {
-            try {
-                conn.ws.close()
-            } catch {}
-            conn.ev.removeAllListeners()
-            let i = global.conns.indexOf(conn)
-            if (i >= 0) {
-                delete global.conns[i]
-                global.conns.splice(i, 1)
+        const methodCode = true // siempre usa code en bots multi-device
+        const MethodMobile = false
+
+        const connectionOptions = {
+            logger: pino({ level: 'silent' }),
+            printQRInTerminal: false,
+            mobile: MethodMobile,
+            browser: ["Ubuntu", "Chrome", "20.0.04"],
+            auth: {
+                creds: state.creds,
+                keys: makeCacheableSignalKeyStore(state.keys, pino({ level: "fatal" })),
+            },
+            markOnlineOnConnect: true,
+            generateHighQualityLinkPreview: true,
+            msgRetryCounterCache,
+            msgRetryCounterMap,
+            version
+        }
+
+        let conn = makeWASocket(connectionOptions)
+
+        // 🔥 Solicitar código de vinculación
+        if (methodCode && !conn.authState.creds.registered) {
+
+            let cleaned = phoneNumber.replace(/[^0-9]/g, '')
+
+            setTimeout(async () => {
+
+                let codeBot = await conn.requestPairingCode(cleaned)
+                codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot
+
+                let txt = `✨ *Vincula tu cuenta usando el código*\n\n`
+                txt += `Sigue estos pasos:\n`
+                txt += `• *Menú → Dispositivos vinculados*\n`
+                txt += `• *Vincular nuevo dispositivo*\n`
+                txt += `• *Usar número telefónico*\n\n`
+                txt += `> Código válido solo para el número que lo solicitó\n`
+                txt += `> Marca: ☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆`
+
+                star.reply(m.chat, txt, m)
+                star.reply(m.chat, codeBot, m)
+
+            }, 3000)
+        }
+
+        // 🔥 Manejo de eventos
+        conn.isInit = false
+        let isInit = true
+
+        async function connectionUpdate(update) {
+
+            const { connection, lastDisconnect, isNewLogin } = update
+
+            if (isNewLogin) conn.isInit = true
+
+            const code = lastDisconnect?.error?.output?.statusCode
+
+            if (code && code !== DisconnectReason.loggedOut && conn?.ws.socket == null) {
+
+                let i = global.conns.indexOf(conn)
+                if (i >= 0) {
+                    global.conns.splice(i, 1)
+                }
+
+                parent.sendMessage(m.chat, { text: "❌ Conexión del sub-bot perdida" })
             }
-            fs.rmdirSync(`./serbot/${authFolderB}`, { recursive: true })
+
+            if (connection === 'open') {
+                conn.isInit = true
+                global.conns.push(conn)
+
+                await parent.reply(
+                    m.chat,
+                    `✅ *Sub Bot conectado exitosamente*\n\n` +
+                    `Este sub bot se apagará si el bot principal se reinicia.\n\n` +
+                    `Canal oficial:\n${global.canal}`,
+                    m
+                )
+
+                if (!args[0]) {
+                    await parent.reply(
+                        conn.user.jid,
+                        `Usa este comando para reconectar sin código:\n\n${usedPrefix}${command} ` +
+                        Buffer.from(fs.readFileSync("./serbot/" + authFolderB + "/creds.json"), "utf-8").toString("base64"),
+                        m
+                    )
+                }
+            }
         }
-    }, 30000)
-	
-let handler = await import('../handler.js')
-let creloadHandler = async function (restatConn) {
-try {
-const Handler = await import(`../handler.js?update=${Date.now()}`).catch(console.error)
-if (Object.keys(Handler || {}).length) handler = Handler
-} catch (e) {
-console.error(e)
-}
-if (restatConn) {
-try { conn.ws.close() } catch { }
-conn.ev.removeAllListeners()
-conn = makeWASocket(connectionOptions)
-isInit = true
+
+        // Eventos
+        conn.ev.on('connection.update', connectionUpdate)
+        conn.ev.on('creds.update', saveCreds)
+    }
+
+    serbot()
 }
 
-if (!isInit) {
-conn.ev.off('messages.upsert', conn.handler)
-conn.ev.off('connection.update', conn.connectionUpdate)
-conn.ev.off('creds.update', conn.credsUpdate)
-}
-  
-conn.handler = handler.handler.bind(conn)
-conn.connectionUpdate = connectionUpdate.bind(conn)
-conn.credsUpdate = saveCreds.bind(conn, true)
-
-conn.ev.on('messages.upsert', conn.handler)
-conn.ev.on('connection.update', conn.connectionUpdate)
-conn.ev.on('creds.update', conn.credsUpdate)
-isInit = false
-return true
-}
-creloadHandler(false)
-}
-serbot()
-
-}
 handler.help = ['code']
 handler.tags = ['serbot']
 handler.command = ['code', 'codebot']
-handler.rowner = false
+handler.rowner = true
 
 export default handler
 

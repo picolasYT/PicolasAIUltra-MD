@@ -1,7 +1,7 @@
 {
-	"name": "Ai Picolas Ultra MD",
+	"name": "PicolasAIUltra-MD",
 	"version": "6.0.0",
-	"description": "Simple WhatsApp Bot Multi Device",
+	"description": "PicolasAIUltra-MD — WhatsApp Bot Multi Device",
 	"main": "index.js",
 	"type": "module",
 	"directories": {
@@ -23,23 +23,23 @@
 		"MD",
 		"baileys-md"
 	],
-	"homepage": "https://github.com/StarlightsTeam/Ai-Hoshino",
+	"homepage": "https://github.com/picolasYT/PicolasAIUltra-MD",
 	"author": {
-		"name": "Irokz Dal ダーク⁩"
+		"name": "Picolas"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/StarlightsTeam/Ai-Hoshino.git"
+		"url": "git+https://github.com/picolasYT/PicolasAIUltra-MD.git"
 	},
 	"bugs": {
-		"url": "https://github.com/StarlightsTeam/Ai-Hoshino/issues"
+		"url": "https://github.com/picolasYT/PicolasAIUltra-MD/issues"
 	},
 	"license": "GPL-3.0-or-later",
 	"dependencies": {
 		"@bochilteam/scraper": "^4.2.4",
 		"@whiskeysockets/baileys": "git+ssh://git@github.com/BrunoSobrino/Baileys-Itsukichann.git",
 		"@ibaraki-douji/pixivts": "^2.4.1",
-		"@StarlightsTeam/Scraper": "github:IrokzDal/Scraper",
+		"@StarllightsTeam/Scraper": "github:IrokzDal/Scraper",
 		"awesome-phonenumber": "^3.4.0",
 		"fluid-spotify.js": "*",
 		"axios": "*",

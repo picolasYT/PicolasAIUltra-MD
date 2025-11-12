@@ -1,25 +1,41 @@
-import { readdirSync, statSync, unlinkSync, existsSync, readFileSync, watch, rmSync, promises as fs} from "fs"
-import path, { join } from 'path'
+import { promises as fs } from "fs"
 
-let handler  = async (m, { conn: parentw, usedPrefix, command}, args) => {
+let handler = async (m, { conn: parentw }) => {
 
-let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let uniqid = `${who.split`@`[0]}`
-let userS = `${conn.getName(who)}`
+  // 🔥 Identifica la persona a eliminar su subbot
+  let who = m.mentionedJid && m.mentionedJid[0]
+      ? m.mentionedJid[0]
+      : m.fromMe
+      ? parentw.user.jid
+      : m.sender
 
-try {
-await fs.rmdir("./serbot/" + uniqid, { recursive: true, force: true })
-await parentw.sendMessage(m.chat, { text: '🚩 Sub-Bot eliminado.' }, { quoted: m })
-} catch(err) {
-if (err.code === 'ENOENT' && err.path === `./serbot/${uniqid}`) {
-await parentw.sendMessage(m.chat, { text: "No cuentas con ninguna sesión de Sub-Bot." }, { quoted: m })
-} else {
-await m.react('✖️')
-}}}
+  let uniqid = who.split('@')[0]
+
+  try {
+    // 🔥 Eliminar carpeta del sub-bot
+    await fs.rmdir(`./serbot/${uniqid}`, { recursive: true, force: true })
+
+    await parentw.sendMessage(
+      m.chat,
+      { text: '🚩 Sub-Bot eliminado correctamente.' },
+      { quoted: m }
+    )
+
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      await parentw.sendMessage(
+        m.chat,
+        { text: "⚠️ No existe ninguna sesión activa para eliminar." },
+        { quoted: m }
+      )
+    } else {
+      await m.react('✖️')
+    }
+  }
+}
+
 handler.tags = ['serbot']
-handler.help = ['delsession']
+handler.help = ['delserbot', 'logout', 'deletesession']
 handler.command = /^(deletesess?ion|eliminarsesion|borrarsesion|delsess?ion|cerrarsesion|delserbot|logout)$/i
-//handler.private = true
-handler.fail = null
 
 export default handler
