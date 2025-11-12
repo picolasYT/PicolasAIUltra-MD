@@ -35,10 +35,11 @@ global.miniurl = fs.readFileSync('./storage/img/miniurl.jpg')
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
-global.group = 'https://chat.whatsapp.com/CH3hrd4ovGHIsFjj8dWGrf' //cambialo por tu grupo
-global.group2 = 'https://chat.whatsapp.com/EXVs651isvlB7MuHiwcLl8' //cambialo por tu grupo
-global.group3 = 'https://chat.whatsapp.com/CKF7jbLN877GLxoIJdbhq1' //cambialo por tu grupo
-global.canal = 'https://whatsapp.com/channel/0029VaBfsIwGk1FyaqFcK91S' //cambialo por tu grupo
+global.group = 'https://chat.whatsapp.com/CIG79cVl9IwKJPl5ERFtgu?mode=wwt' // grupo oficial de PicolasAIUltra-MD
+global.group2 = 'https://chat.whatsapp.com/CIG79cVl9IwKJPl5ERFtgu?mode=wwt' // grupo secundario (mismo enlace, opcional)
+global.group3 = 'https://chat.whatsapp.com/CIG79cVl9IwKJPl5ERFtgu?mode=wwt' // grupo de soporte (mismo enlace, opcional)
+global.canal = 'https://whatsapp.com/channel/0029VbBY6fkAzNbo3NqVBN33' // canal oficial de PicolasAIUltra-MD
+
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
