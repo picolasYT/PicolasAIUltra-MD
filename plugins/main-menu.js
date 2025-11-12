@@ -123,16 +123,16 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
 
-    // 📁 Ruta del GIF (guardalo en /storage/img/menu.gif)
-    let gif = './storage/img/menu.gif'
+    // 🎞️ Usa el archivo MP4 convertido
+    let menuVideo = './storage/img/menu.mp4'
 
     await m.react('⭐')
 
-    // 🔥 Enviar GIF animado (como video para compatibilidad)
+    // 🔥 Envía el video (reproduce automáticamente como GIF)
     await conn.sendMessage(
       m.chat,
       {
-        video: { url: gif },
+        video: { url: menuVideo },
         caption: text.trim(),
         gifPlayback: true,
         mentions: [m.sender]
