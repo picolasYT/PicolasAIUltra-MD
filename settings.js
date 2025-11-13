@@ -6,58 +6,74 @@ import cheerio from 'cheerio'
 import fetch from 'node-fetch'
 import axios from 'axios'
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*────────────────────────────────────────────────────────────*
 
 global.owner = [
   ['5492994587598', 'Picolas', true],
   ['5219983369376', 'Hans', true]
 ]
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*────────────────────────────────────────────────────────────*
 
 global.mods = []
 global.prems = []
    
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*────────────────────────────────────────────────────────────*
 
-global.packname = ``
-global.author = '{\n "bot": {\n   "name": "Ai Hoshino",\n     "author": "Irokz Dal ダーク",\n   "status_bot": "active"\n }\n}'
-global.wait = '🐢 *Aɢᴜᴀʀᴅᴇ ᴜɴ ᴍᴏᴍᴇɴᴛᴏ, sᴏʏ ʟᴇɴᴛᴀ... ฅ^•ﻌ•^ฅ*'
-global.botname = '✯ Ai Hoshino - MD ✰'
-global.textbot = `Powered By Starlights Team`
-global.listo = '*Aqui tiene ฅ^•ﻌ•^ฅ*'
-global.namechannel = '【 ✯ Starlights Team - Oficial Chanel ✰ 】'
+global.packname = `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆`
+global.author = '{\n "bot": {\n   "name": "PicolasAIUltra-MD",\n     "author": "Picolas",\n   "status_bot": "active"\n }\n}'
+global.wait = '🐢 *Aguarde un momento… estoy procesando* ฅ^•ﻌ•^ฅ'
+global.botname = '☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆'
+global.textbot = `Powered By ☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆`
+global.listo = '*Aquí tiene ฅ^•ﻌ•^ฅ*'
+global.namechannel = '【 ☆ PicolasAIUltra-MD - Canal Oficial ☆ 】'
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*────────────────────────────────────────────────────────────*
 
 global.catalogo = fs.readFileSync('./storage/img/catalogo.png')
 global.miniurl = fs.readFileSync('./storage/img/miniurl.jpg')
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*────────────────────────────────────────────────────────────*
 
-global.group = 'https://chat.whatsapp.com/CIG79cVl9IwKJPl5ERFtgu?mode=wwt' // grupo oficial de PicolasAIUltra-MD
-global.group2 = 'https://chat.whatsapp.com/CIG79cVl9IwKJPl5ERFtgu?mode=wwt' // grupo secundario (mismo enlace, opcional)
-global.group3 = 'https://chat.whatsapp.com/CIG79cVl9IwKJPl5ERFtgu?mode=wwt' // grupo de soporte (mismo enlace, opcional)
-global.canal = 'https://whatsapp.com/channel/0029VbBY6fkAzNbo3NqVBN33' // canal oficial de PicolasAIUltra-MD
+global.group = 'https://chat.whatsapp.com/CIG79cVl9IwKJPl5ERFtgu?mode=wwt'
+global.group2 = 'https://chat.whatsapp.com/CIG79cVl9IwKJPl5ERFtgu?mode=wwt'
+global.group3 = 'https://chat.whatsapp.com/CIG79cVl9IwKJPl5ERFtgu?mode=wwt'
+global.canal = 'https://whatsapp.com/channel/0029VbBY6fkAzNbo3NqVBN33'
 
+//*────────────────────────────────────────────────────────────*
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+global.estilo = { 
+  key: {  
+    fromMe: false, 
+    participant: `0@s.whatsapp.net`,
+    ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) 
+  }, 
+  message: { 
+    orderMessage: { 
+      itemCount : -999999, 
+      status: 1, 
+      surface : 1, 
+      message: botname, 
+      orderTitle: 'PicolasAIUltra-MD', 
+      thumbnail: catalogo, 
+      sellerJid: '0@s.whatsapp.net'
+    }
+  }
+}
 
-global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: botname, orderTitle: 'Bang', thumbnail: catalogo, sellerJid: '0@s.whatsapp.net'}}}
-
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*────────────────────────────────────────────────────────────*
 
 global.cheerio = cheerio
 global.fs = fs
 global.fetch = fetch
 global.axios = axios
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*────────────────────────────────────────────────────────────*
 
 global.multiplier = 69 
-global.maxwarn = '2' // máxima advertencias
+global.maxwarn = '2'
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*────────────────────────────────────────────────────────────*
 
 let file = fileURLToPath(import.meta.url)
 watchFile(file, () => {
