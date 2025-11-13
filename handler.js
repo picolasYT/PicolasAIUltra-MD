@@ -12,10 +12,6 @@ const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(function (
     clearTimeout(this)
     resolve()
 }, ms))
-
-// ===== Firma global para respuestas con m.reply =====
-const PICOLAS_FIRMA = '\n\n> ☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆'
-// ====================================================
  
 export async function handler(chatUpdate) {
     this.msgqueque = this.msgqueque || []
@@ -31,23 +27,6 @@ export async function handler(chatUpdate) {
         m = smsg(this, m) || m
         if (!m)
             return
-
-        // ==== Envoltorio SEGURO de m.reply para agregar la firma =====
-        if (typeof m.reply === 'function') {
-            const originalReply = m.reply
-            m.reply = function (text, ...rest) {
-                try {
-                    if (typeof text === 'string') {
-                        text = text + PICOLAS_FIRMA
-                    }
-                } catch (e) {
-                    // si algo sale mal, manda sin la firma
-                }
-                return originalReply.call(this, text, ...rest)
-            }
-        }
-        // =============================================================
-
         m.exp = 0
         m.limit = false
         try {
@@ -112,7 +91,7 @@ export async function handler(chatUpdate) {
                     chat.antiLink = false
                 if (!('onlyLatinos' in chat))
                     chat.onlyLatinos = false
-                if (!('nsfw' in chat))
+                 if (!('nsfw' in chat))
                     chat.nsfw = false
                 if (!isNumber(chat.expired))
                     chat.expired = 0
@@ -169,7 +148,7 @@ export async function handler(chatUpdate) {
         let usedPrefix
         
         const groupMetadata = m.isGroup ? { ...(conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}), ...(((conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}).participants) && { participants: ((conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}).participants || []).map(p => ({ ...p, id: p.jid, jid: p.jid, lid: p.lid })) }) } : {};
-        const participants = ((m.isGroup ? groupMetadata.participants : []) || []).map(participant => ({ id: participant.jid, jid: participant.jid, lid: participant.lid, admin: participant.admin }));
+       const participants = ((m.isGroup ? groupMetadata.participants : []) || []).map(participant => ({ id: participant.jid, jid: participant.jid, lid: participant.lid, admin: participant.admin }));
         const user = (m.isGroup ? participants.find(u => conn.decodeJid(u.id) === m.sender) : {}) || {}
         const bot = (m.isGroup ? participants.find(u => conn.decodeJid(u.id) == this.user.jid) : {}) || {}
         const isRAdmin = user?.admin == 'superadmin' || false
