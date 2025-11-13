@@ -38,14 +38,15 @@ Su estructura permite estabilidad, velocidad, cientos de comandos y personalizac
 ```bash
 git clone https://github.com/picolasYT/PicolasAIUltra-MD
 cd PicolasAIUltra-MD
+```
 2️⃣ Instalar dependencias
-bash
-Copiar código
+```bash
 npm install
+```
 3️⃣ Iniciar el bot
-bash
-Copiar código
+```bash
 npm start
+```
 Luego escaneá el código QR o ingresá el Pairing Code para vincular tu WhatsApp.
 
 🔗 Canales y soportes oficiales
