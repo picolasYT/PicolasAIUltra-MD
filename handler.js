@@ -12,6 +12,10 @@ const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(function (
     clearTimeout(this)
     resolve()
 }, ms))
+
+// ===== Firma global para respuestas con m.reply =====
+const PICOLAS_FIRMA = '\n\n> ☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆'
+// ====================================================
  
 export async function handler(chatUpdate) {
     this.msgqueque = this.msgqueque || []
@@ -27,6 +31,23 @@ export async function handler(chatUpdate) {
         m = smsg(this, m) || m
         if (!m)
             return
+
+        // ==== Envoltorio SEGURO de m.reply para agregar la firma =====
+        if (typeof m.reply === 'function') {
+            const originalReply = m.reply
+            m.reply = function (text, ...rest) {
+                try {
+                    if (typeof text === 'string') {
+                        text = text + PICOLAS_FIRMA
+                    }
+                } catch (e) {
+                    // si algo sale mal, manda sin la firma
+                }
+                return originalReply.call(this, text, ...rest)
+            }
+        }
+        // =============================================================
+
         m.exp = 0
         m.limit = false
         try {
@@ -91,7 +112,7 @@ export async function handler(chatUpdate) {
                     chat.antiLink = false
                 if (!('onlyLatinos' in chat))
                     chat.onlyLatinos = false
-                 if (!('nsfw' in chat))
+                if (!('nsfw' in chat))
                     chat.nsfw = false
                 if (!isNumber(chat.expired))
                     chat.expired = 0
@@ -148,7 +169,7 @@ export async function handler(chatUpdate) {
         let usedPrefix
         
         const groupMetadata = m.isGroup ? { ...(conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}), ...(((conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}).participants) && { participants: ((conn.chats[m.chat]?.metadata || await this.groupMetadata(m.chat).catch(_ => null) || {}).participants || []).map(p => ({ ...p, id: p.jid, jid: p.jid, lid: p.lid })) }) } : {};
-       const participants = ((m.isGroup ? groupMetadata.participants : []) || []).map(participant => ({ id: participant.jid, jid: participant.jid, lid: participant.lid, admin: participant.admin }));
+        const participants = ((m.isGroup ? groupMetadata.participants : []) || []).map(participant => ({ id: participant.jid, jid: participant.jid, lid: participant.lid, admin: participant.admin }));
         const user = (m.isGroup ? participants.find(u => conn.decodeJid(u.id) === m.sender) : {}) || {}
         const bot = (m.isGroup ? participants.find(u => conn.decodeJid(u.id) == this.user.jid) : {}) || {}
         const isRAdmin = user?.admin == 'superadmin' || false
@@ -403,47 +424,23 @@ export async function handler(chatUpdate) {
 
 global.dfail = (type, m, conn, usedPrefix) => {
     let msg = {
-        rowner: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆  
-✯ Este comando solo puede ser utilizado por el *Creador* del Bot.`,
-
-        owner: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆  
-✯ Este comando es exclusivo del *Creador* y *Sub Bots*.`,
-
-        mods: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐌𝐃} ☆  
-✯ Solo los *Moderadores* pueden usar este comando.`,
-
-        premium: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐌𝐃} ☆  
-✯ Este comando es para usuarios *Premium*.`,
-
-        group: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐌𝐃} ☆  
-✯ Este comando solo funciona en *Grupos*.`,
-
-        private: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐌𝐃} ☆  
-✯ Este comando solo puede usarse en mi *Chat Privado*.`,
-
-        admin: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐌𝐃} ☆  
-✯ Este comando es para los *Administradores* del grupo.`,
-
-        botAdmin: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐌𝐃} ☆  
-✯ Necesito ser *Administradora* para ejecutar esto.`,
-
-        unreg: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐌𝐃} ☆  
-✯ Debes estar *Registrado* para usar este comando.
-
-Usa: */reg nombre.edad*
-Ejemplo: */reg Picolas.25*
-No incluyas los * *`,
-
-        restrict: `☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐌𝐃} ☆  
-✯ Esta característica está *deshabilitada.*`
+        rowner: `✯ Hola, este comando solo puede ser utilizado por el *Creador* de la Bot.`,
+        owner: `✯ Hola, este comando solo puede ser utilizado por el *Creador* de la Bot y *Sub Bots*.`,
+        mods: `✯ Hola, este comando solo puede ser utilizado por los *Moderadores* de la Bot.`,
+        premium: `✯ Hola, este comando solo puede ser utilizado por Usuarios *Premium*.`,
+        group: `✯ Hola, este comando solo puede ser utilizado en *Grupos*.`,
+        private: `✯ Hola, este comando solo puede ser utilizado en mi Chat *Privado*.`,
+        admin: `✯ Hola, este comando solo puede ser utilizado por los *Administradores* del Grupo.`,
+        botAdmin: `✯ Hola, la bot debe ser *Administradora* para ejecutar este Comando.`,
+        unreg: `✯ Hola, para usar este comando debes estar *Registrado.*\n\nPara usar el bot debes registrarte primero\n\nUtiliza: */reg nombre.edad*\n\n_Ejemplo: */reg おDanịel.xyz⁩.666*_\n\nNo pongas los * *`,
+        restrict: `✯ Hola, esta característica está *deshabilitada.*`  
     }[type]
-
     if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('✖️'))
 }
 
-// autoreload brand
+let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {
     unwatchFile(file)
-    console.log(chalk.magenta("☆ {ℙ𝕚𝕔𝕠𝕝𝕒𝕤𝔸𝕀𝐮𝐥𝐭𝐫𝐚-𝐌𝐃} ☆ se actualizó 'handler.js'"))
+    console.log(chalk.magenta("Se actualizo 'handler.js'"))
     if (global.reloadHandler) console.log(await global.reloadHandler())
 })
