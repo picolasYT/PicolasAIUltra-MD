@@ -1,3 +1,5 @@
+console.log('✯ Iniciando PicolasAIUltra-MD ✯')
+
 import { join, dirname } from 'path'
 import { createRequire } from 'module'
 import { fileURLToPath } from 'url'
@@ -5,21 +7,19 @@ import { setupMaster, fork } from 'cluster'
 import { watchFile, unwatchFile } from 'fs'
 import cfonts from 'cfonts'
 
-console.log('✯ Iniciando PicolasAIUltra-MD ✯')
-
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const require = createRequire(__dirname)
 
 cfonts.say('Picolas\nAIUltra-MD', {
   font: 'chrome',
   align: 'center',
-  gradient: ['cyan', 'magenta']
+  gradient: ['red', 'magenta']
 })
 
-cfonts.say('WhatsApp Bot Multi Device', {
+cfonts.say(`WhatsApp Bot Multi Device`, {
   font: 'console',
   align: 'center',
-  gradient: ['cyan', 'magenta']
+  gradient: ['red', 'magenta']
 })
 
 let isRunning = false
